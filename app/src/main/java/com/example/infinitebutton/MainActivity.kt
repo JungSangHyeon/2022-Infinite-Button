@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
@@ -67,16 +68,18 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-           val cm = 100
+            val configuration = LocalConfiguration.current
+            val cm = configuration.screenWidthDp.dp/xAxisAreaCount
+
             Box(modifier = Modifier.fillMaxSize()){
                 buttonMap.forEach {
                     Text(
                         text = "${it.width} * ${it.height}",
                         modifier = Modifier
-                            .size((cm*it.width).dp, (cm*it.height).dp)
+                            .size(cm*it.width, cm*it.height)
                             .padding(8.dp)
                             .offset(
-                                (cm*it.left).dp, (cm*it.top).dp,
+                                cm*it.left, cm*it.top,
                             )
                             .background(Color.Gray)
                             .clickable {  }
