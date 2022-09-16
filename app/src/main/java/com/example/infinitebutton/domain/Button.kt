@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
@@ -22,8 +23,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.infinitebutton.R
 import com.example.infinitebutton.tech.ColorUtil
-
-// TODO haptick
 
 class Button(
     private val left: Int,
@@ -41,9 +40,9 @@ class Button(
     }
     private val shape = ShapeType.values().random()
 
-    private val backgroundColor = ColorUtil.composeBrightColor()
+    private val backgroundColor = Color.White
 
-    private val borderThick = (0..10).random()
+    private val borderThick = (1..10).random()
     private val content = contentList.random()
     private val borderAndContentColor = run{
         var temp = ColorUtil.composeBrightColor()
@@ -72,7 +71,7 @@ class Button(
                 colorFilter = ColorFilter.tint(borderAndContentColor),
                 modifier = Modifier
                     .size(unit * height)
-                    .padding((borderThick + 16).dp)
+                    .padding(16.dp)
             )
         }
     }
