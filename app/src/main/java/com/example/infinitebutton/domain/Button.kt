@@ -14,13 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.ColorUtils
 import com.example.infinitebutton.R
 import com.example.infinitebutton.tech.ColorUtil
 
@@ -40,17 +38,11 @@ class Button(
     }
     private val shape = ShapeType.values().random()
 
-    private val backgroundColor = Color.White
-
     private val borderThick = (1..10).random()
     private val content = contentList.random()
-    private val borderAndContentColor = run{
-        var temp = ColorUtil.composeBrightColor()
-        while(temp == backgroundColor){
-            temp = ColorUtil.composeBrightColor()
-        }
-        temp
-    }
+    private val borderAndContentColor = ColorUtil.composeBrightColor()
+
+    private val backgroundColor = Color(ColorUtils.blendARGB(borderAndContentColor.toArgb(), Color.White.toArgb(), 0.65f))
 
     @Composable
     fun ComposeButton(click: () -> Unit) {
