@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.example.infinitebutton.R
 import com.example.infinitebutton.tech.ColorUtil
 
-// TODO haptick, content
+// TODO haptick
 
 class Button(
     private val left: Int,
@@ -32,7 +32,6 @@ class Button(
     private val height: Float,
     private val unit: Dp
 ) {
-
     enum class ShapeType(
         val composeShape: Shape
     ) {
@@ -40,13 +39,19 @@ class Button(
         ROUND_RECT(RoundedCornerShape(20)),
         CIRCLE(CircleShape)
     }
-
     private val shape = ShapeType.values().random()
 
-    private val borderThick = (0..10).random()
+    private val backgroundColor = ColorUtil.composeBrightColor()
 
-    private val backgroundColor = ColorUtil.randomComposeColor()
-    private val borderAndContentColor = ColorUtil.randomComposeColor()
+    private val borderThick = (0..10).random()
+    private val content = contentList.random()
+    private val borderAndContentColor = run{
+        var temp = ColorUtil.composeBrightColor()
+        while(temp == backgroundColor){
+            temp = ColorUtil.composeBrightColor()
+        }
+        temp
+    }
 
     @Composable
     fun ComposeButton(click: () -> Unit) {
@@ -62,11 +67,33 @@ class Button(
                 .clickable { click() }
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = content),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(borderAndContentColor),
-                modifier = Modifier.size(unit * height)
+                modifier = Modifier
+                    .size(unit * height)
+                    .padding((borderThick + 16).dp)
             )
         }
     }
 }
+
+private val contentList = listOf(
+    R.drawable.ic_baseline_123_24,
+    R.drawable.ic_baseline_all_inclusive_24,
+    R.drawable.ic_baseline_arrow_circle_up_24,
+    R.drawable.ic_baseline_call_24,
+    R.drawable.ic_baseline_center_focus_weak_24,
+    R.drawable.ic_baseline_directions_run_24,
+    R.drawable.ic_baseline_done_24,
+    R.drawable.ic_baseline_exposure_plus_1_24,
+    R.drawable.ic_baseline_fingerprint_24,
+    R.drawable.ic_baseline_flight_24,
+    R.drawable.ic_baseline_format_shapes_24,
+    R.drawable.ic_baseline_front_hand_24,
+    R.drawable.ic_baseline_keyboard_voice_24,
+    R.drawable.ic_baseline_message_24,
+    R.drawable.ic_baseline_mood_24,
+    R.drawable.ic_baseline_person_add_24,
+    R.drawable.ic_baseline_thumb_up_24
+)
