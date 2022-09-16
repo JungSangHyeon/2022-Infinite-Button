@@ -1,12 +1,10 @@
 package com.example.infinitebutton.domain
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import com.example.infinitebutton.tech.forAllCombination
 
@@ -24,7 +22,6 @@ class ButtonPlate(
     @Composable
     fun ComposeButtonPlate() = Box(
         modifier = Modifier
-            .background(Color.Black)
             .size(unit * width, unit * height)
     ) {
         buttons.value?.forEach {
